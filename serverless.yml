@@ -1,0 +1,29 @@
+service: serverless-dynamodb-local-sandbox
+plugins:
+  - serverless-dynamodb-local
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ap-northeast-1
+  stage: ${opt:stage}
+custom:
+  cors:
+    origin: "*"
+    headers:
+      - Content-Type
+      - X-Amz-Date
+      - Authorization
+      - X-Api-Key
+      - X-Amz-Security-Token
+      - X-Amz-User-Agent
+      - If-Modified-Since
+  dynamodb:
+    stages:
+      - dev
+      - local
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+
